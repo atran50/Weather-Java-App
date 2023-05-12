@@ -3,9 +3,13 @@ apply plugin: 'application'
 apply plugin: 'checkstyle'
 
 mainClassName = 'Main'
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 19
+targetCompatibility = 19
 version = '1.0'
+
+run {
+    standardInput = System.in
+}
 
 repositories {
     mavenCentral()

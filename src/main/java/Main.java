@@ -17,18 +17,33 @@ public class Main {
   private static final OkHttpClient client = new OkHttpClient();
   private static final String CREDENTIALS_FILEPATH = "/credentials.json";
 
-
   /**
    * Main executable method.
    *
    * @param args command line arguments
    */
   public static void main(String[] args) {
-    try {
-      run("Phoenix");
-    } catch (IOException e) {
-      e.printStackTrace();
+    menu();
+    while (true) {
+      System.out.println("Please enter your desired city");
+      Scanner scanner = new Scanner(System.in);
+      try {
+        run(scanner.nextLine());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
+  }
+
+  private static void menu() {
+    System.out.println("""
+        ===========================================
+        |                                          |
+        |          Welcome to OpenWeather          |
+        |           A Weather Forecast App         |
+        |                                          |
+        ===========================================
+        """);
   }
 
   /**
@@ -37,7 +52,7 @@ public class Main {
    * @param cityName name of the city being requested
    * @throws IOException in the case of an input/output error
    */
-  public static void run(String cityName) throws IOException {
+  private static void run(String cityName) throws IOException {
     Request request = new Request.Builder()
         .url("https://api.openweathermap.org/data/2.5/weather?units=imperial&q=" + cityName
             + "&appid=" + getKey())
